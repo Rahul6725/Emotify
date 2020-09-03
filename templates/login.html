@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Emotify</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+    <noscript>
+        <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <section id="main">
+            <h2>login</h2>
+            <hr />
+            <form method="post" action="#">
+                <div class="fields">
+
+                    <div class="field">
+                        <input type="email" name="email" id="email" placeholder="Email" />
+                    </div>
+                    <div class="field">
+                        <input type="password" name="password" id="password" placeholder="password" />
+                    </div>
+                </div>
+                <a href="{% url 'signup' %}">
+                    <h5>Don't have an Account?</h5>
+                </a>
+                <ul class="actions special">
+                    <li><a href="#" class="button">Login</a></li>
+                </ul>
+            </form>
+            <hr />
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; Emotify</li>
+            </ul>
+        </footer>
+    </div>
+    <!-- Scripts -->
+    <script>
+        if ('addEventListener' in window) {
+            window.addEventListener('load', function () { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+            document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+        }
+    </script>
+</body>
+
+</html>

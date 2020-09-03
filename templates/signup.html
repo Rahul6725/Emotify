@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Emotify</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+	<noscript>
+		<link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<section id="main">
+			<h2>Sign up</h2>
+			<hr />
+			<!-- <button class="trigger">Choose your avatar</button>
+			<br />
+
+			<div class="sidebarContainer">
+				<div class="sidebar">
+					<a href="#" class="modalClose">
+						<svg viewBox="0 0 20 20">
+							<path fill="none"
+								d="M12.71,7.291c-0.15-0.15-0.393-0.15-0.542,0L10,9.458L7.833,7.291c-0.15-0.15-0.392-0.15-0.542,0c-0.149,0.149-0.149,0.392,0,0.541L9.458,10l-2.168,2.167c-0.149,0.15-0.149,0.393,0,0.542c0.15,0.149,0.392,0.149,0.542,0L10,10.542l2.168,2.167c0.149,0.149,0.392,0.149,0.542,0c0.148-0.149,0.148-0.392,0-0.542L10.542,10l2.168-2.168C12.858,7.683,12.858,7.44,12.71,7.291z M10,1.188c-4.867,0-8.812,3.946-8.812,8.812c0,4.867,3.945,8.812,8.812,8.812s8.812-3.945,8.812-8.812C18.812,5.133,14.867,1.188,10,1.188z M10,18.046c-4.444,0-8.046-3.603-8.046-8.046c0-4.444,3.603-8.046,8.046-8.046c4.443,0,8.046,3.602,8.046,8.046C18.046,14.443,14.443,18.046,10,18.046z">
+							</path>
+						</svg>
+					</a>
+					<h2>Choose your avatar</h2>
+					<ul class="avatars">
+						<li>
+							<img src="images/Avatars - SVG/cristiano-ronaldo.svg">
+						</li>
+						<li>
+							<img src="images/Avatars - SVG/dalai-lama.svg">
+						</li>
+						<li>
+							<img src="images/Avatars - SVG/indian-man.svg">
+						</li>
+					</ul>
+					<button class="tomato chooseBtn"><span>CHOOSE</span></button>
+				</div>
+			</div>
+
+			<div class="complete">
+				<header>
+					<div class="mainSvg avatar"></div>
+					<p></p>
+					<!-- 
+				</header>
+			</div> -->
+			<!-- <span class="avatar"><img src="images/DSC06030.jpg" alt="" /></span>  -->
+			<form method="post" action="#">
+				<div class="fields">
+
+					<div class="field">
+						<input type="email" name="email" id="email" placeholder="Email" />
+					</div>
+					<div class="field">
+						<input type="text" name="email" id="email" placeholder="Username" />
+					</div>
+					<div class="field">
+						<input type="password" name="password" id="password" placeholder="password" />
+					</div>
+				</div>
+				<a href="{% url 'login' %}"><h5>Already have an Account?</h5></a>
+				<ul class="actions special">
+					<li><a href="#" class="button">Get Started</a></li>
+				</ul>
+			</form>
+			<hr />
+		</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="copyright">
+				<li>&copy; Emotify</li>
+			</ul>
+		</footer>
+	</div>
+	<!-- Scripts -->
+	<script>
+		if ('addEventListener' in window) {
+			window.addEventListener('load', function () { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+			document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+		}
+	</script>
+
+	<!-- <script>
+		var button = $(".trigger")[0];
+		var sidebar = $(".sidebar")[0];
+
+		$(document).on("click", ".trigger", function () {
+			setTimeout(function () {
+				$(".sidebarContainer").toggleClass("show");
+				button,
+					sidebar,
+				{
+					duration: 1,
+					targetShowDuration: 0,
+					relativeToWindow: true
+				},
+					function () {
+						$(sidebar).toggleClass("show");
+					}	
+			}, 500);
+		});
+		$(document).on("click", ".modalClose", function () {
+			$(sidebar).toggleClass("show");
+		
+				sidebar,
+				button,
+				{
+					duration: 1
+				},
+				function () {
+					$(".sidebarContainer").toggleClass("show");
+					$(".trigger").hide();
+				}
+		});
+		$(document).on("click", ".chooseBtn", function () {
+			var selected = $(".avatars li.selected");
+			var complete = $(".complete");
+			$(sidebar).toggleClass("show");
+				sidebar,
+				button,
+				{
+					duration: 0.6
+				},
+				function () {
+					$(".trigger").hide();
+					complete.find(".mainSvg").append(selected.find("svg").clone());
+					complete.find("p").html(selected.find("p").html());
+					setTimeout(function () {
+						$(".loader").fadeIn();
+					}, 500);
+					setTimeout(function () {
+						$(".loader").fadeOut(function () {
+							complete.fadeIn(function () {
+								$(".done").addClass("show");
+							});
+						});
+					}, 2000);
+				}
+		});
+		$(document).on("click", ".avatars li", function () {
+			if (!$(this).hasClass("selected")) {
+				$(".avatars li").removeClass("selected");
+			}
+			$(this).toggleClass("selected");
+		});
+
+		var parent, ink, d, x, y;
+		$("button").click(function (e) {
+			parent = $(this);
+			//create .ink element if it doesn't exist
+			if (parent.find(".ink").length == 0)
+				parent.prepend("<span class='ink'></span>");
+
+			ink = parent.find(".ink");
+			//incase of quick double clicks stop the previous animation
+			ink.removeClass("animate");
+
+			//set size of .ink
+			if (!ink.height() && !ink.width()) {
+				//use parent's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+				d = Math.max(parent.outerWidth(), parent.outerHeight());
+				ink.css({
+					height: d,
+					width: d
+				});
+			}
+
+			//get click coordinates
+			//logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
+			x = e.pageX - parent.offset().left - ink.width() / 2;
+			y = e.pageY - parent.offset().top - ink.height() / 2;
+
+			//set the position and add class .animate
+			ink
+				.css({
+					top: y + "px",
+					left: x + "px"
+				})
+				.addClass("animate");
+		});
+
+	</script> -->
+
+</body>
+
+</html>
