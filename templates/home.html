@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Emotify</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+    <noscript>
+        <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand">Emotify</a>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#css">Playlist</a></li>
+            <li><a href="#javascript">Hello Rahul</a></li>
+        </ul>
+        <button class="navbar-toggler">
+            <span></span>
+        </button>
+    </nav>
+
+    <section id="header" class="dark">
+        <header>
+            <h1 style="color: white;">Welcome to Emotify</h1>
+            <p>A free responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+        </header>
+        <footer>
+            <a href="#first" class="button scrolly">Proceed to second phase</a>
+        </footer>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <section>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="copyright">
+                <li>&copy; Emotify</li>
+            </ul>
+        </footer>
+    </div>
+    <!-- Scripts -->
+    <script>
+        if ('addEventListener' in window) {
+            window.addEventListener('load', function () { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+            document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+        }
+    </script>
+    <script>
+        const navbarToggler = document.querySelector(".navbar-toggler");
+        const navbarMenu = document.querySelector(".navbar ul");
+        const navbarLinks = document.querySelectorAll(".navbar a");
+
+        navbarToggler.addEventListener("click", navbarTogglerClick);
+
+        function navbarTogglerClick() {
+            navbarToggler.classList.toggle("open-navbar-toggler");
+            navbarMenu.classList.toggle("open");
+        }
+
+        navbarLinks.forEach(elem => elem.addEventListener("click", navbarLinkClick));
+
+        function navbarLinkClick() {
+            if (navbarMenu.classList.contains("open")) {
+                navbarToggler.click();
+            }
+        }
+    </script>
+</body>
+
+</html>
