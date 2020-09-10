@@ -139,6 +139,10 @@ table {
   border-spacing: 0;
 }
 
+#table-values {
+  text-align: left;
+}
+
 body {
   -webkit-text-size-adjust: none;
 }
@@ -220,7 +224,6 @@ body {
 }
 
 body:after {
-  content: "";
   display: block;
   position: fixed;
   top: 0;
@@ -945,6 +948,7 @@ button,
   background-color: transparent;
   border-radius: 4px;
   border: solid 1px #c8cccf;
+  background-color: #fff;
   color: #414f57 !important;
   cursor: pointer;
   text-align: center;
@@ -1156,7 +1160,6 @@ body.is-preload #main {
 }
 
 #wrapper:before {
-  content: "";
   display: block;
 }
 
@@ -1319,6 +1322,7 @@ body.is-ie #wrapper {
   position: relative;
   margin: 0;
   top: 40%;
+  z-index: 10;
   bottom: 50%;
   text-align: center;
   color: #fff;

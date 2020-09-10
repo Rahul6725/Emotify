@@ -20,7 +20,7 @@
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="#css">Playlist</a></li>
-            <li><a href="#javascript">Hello Rahul</a></li>
+            <li><a href="{% url 'account' %}">Hello Rahul</a></li>
         </ul>
         <button class="navbar-toggler">
             <span></span>
@@ -30,11 +30,11 @@
     <section id="header" class="dark">
         <header>
             <h1 style="color: white;">Welcome to Emotify</h1>
-            <p>A free responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+            <p>Play Songs based on your emotions</p>
         </header>
-        <footer>
-            <a href="#first" class="button scrolly">Proceed to second phase</a>
-        </footer>
+        <ul class="actions special">
+            <li><a href="{% url 'home' %}" style="z-index: 5;" class="button">Detect your face</a></li>
+        </ul>
     </section>
 
     <!-- Wrapper -->
