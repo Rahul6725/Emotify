@@ -1322,7 +1322,7 @@ body.is-ie #wrapper {
   position: relative;
   margin: 0;
   top: 40%;
-  z-index: 10;
+  z-index: 1;
   bottom: 50%;
   text-align: center;
   color: #fff;
@@ -1504,3 +1504,39 @@ background-image: linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 22
 }
 
 /* album section ends */
+
+
+.fronte {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  margin: 0;
+  background-size: cover;
+  position: fixed;
+}
+
+.content {
+
+  -moz-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -moz-transform: rotateX(0deg);
+  -webkit-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  -moz-transition: opacity 1s ease, -moz-transform 1s ease;
+  -webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
+  -ms-transition: opacity 1s ease, -ms-transform 1s ease;
+  transition: opacity 1s ease, transform 1s ease;
+  background-color: white;
+  border-radius: 4px;
+  text-align: center;
+  opacity: 0.95;
+  z-index: 10;
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  color: black;
+}
