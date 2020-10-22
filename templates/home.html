@@ -16,11 +16,11 @@
 <body class="is-preload">
 
 
-  <div class="ch-username fronte">
+  <!-- <div class="ch-username fronte">
     <div class="content">
       <video id="webcam" autoplay playsinline width="900" height="600"></video>
     </div>
-  </div>
+  </div> -->
   <!-- Navbar -->
   <nav class="navbar">
     <a href="{% url 'home' %}" class="navbar-brand">Emotify</a>
@@ -41,7 +41,7 @@
     </header>
     <ul class="actions special">
       <li>
-        <a id="detectface" style="z-index: 5" class="button">Detect your face</a>
+        <a id="detectface" href="{% url 'detectface' %}" style="z-index: 5" class="button">Detect your face</a>
       </li>
     </ul>
   </section>
@@ -148,12 +148,10 @@
         navbarToggler.click();
       }
     }
-  </script>
-  <script>
 
 
   </script>
-  <script>
+  {% comment %} <script>
     // document.getElementById("facecapture").style.display = "none";
     $(document).ready(function () {
       $(".ch-username").hide();
@@ -191,7 +189,7 @@
     });
     }
 
-  </script>
+  </script> {% endcomment %}
 </body>
 
 </html>
