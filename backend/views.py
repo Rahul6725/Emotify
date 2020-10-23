@@ -6,8 +6,6 @@ from .models import Captured_Images
 
 # Create your views here.
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 def welcome(request):
     return render(request, "welcome.html")
 
@@ -23,11 +21,12 @@ def home(request):
 def account(request):
     return render(request, "account.html")
 
+
 def detectface(request):
     dt = datetime.datetime.now()
     dt = dt.strftime("%d/%m/%Y%H:%M:%S")
     print("[INFORMATION] Loading model... ")
-    net = cv2.dnn.readNetFromCaffe("backend/deploy.prototxt.txt", "backend/res10_300x300_ssd_iter_140000.caffemodel")
+    net = cv2.dnn.readNetFromCaffe("deploy.prototxt.txt", "res10_300x300_ssd_iter_140000.caffemodel")
     print("[INFORMATION] Starting Video Stream... ")
     vs = VideoStream(src=0).start()
     time.sleep(1)
@@ -59,11 +58,16 @@ def detectface(request):
         # key = cv2.waitKey(i) & 0xFF
         # show the output frame
         if np.any(p):
-            main_pic = cv2.imwrite(os.path.join(BASE_DIR, "static/images/user " + str(dt) + ".jpg"), fram)
+            i = datetime.datetime.now()
+            now = str(i.year) + '-' + str(i.month) + '-' + str(i.day) + '-' + str(i.day) + '-' + str(i.hour) + '-' + str(i.minute) + '-' + str(i.second)
+            filenaam = 'media/' + "user" + str(now) + '.jpg'
+            destination = open(filenaam, 'w+')
+            main_pic = cv2.imwrite(filenaam, fram)
+            destination.close()
             break
     # ending all processes
     cv2.destroyAllWindows()
     vs.stop()
-    cap = Captured_Images(user_face_image = main_pic)
+    cap = Captured_Images(user_face_image = filenaam)
     cap.save()
     return redirect('home')
