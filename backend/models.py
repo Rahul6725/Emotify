@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 # Create your models here.
-class User(AbstractUser):
-    country = models.CharField(max_length=30)
-    user_img = models.ImageField(upload_to='user_images/')
+class User_Profile_Images(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_img = models.ImageField(upload_to='user_profile_images/')
 
 class Genre(models.Model):
     genre_name = models.CharField(max_length=50)

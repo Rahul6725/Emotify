@@ -831,6 +831,7 @@ ul.actions.fit.stacked {
   }
 
   ul.actions:not(.fixed) li input[type="submit"],
+  ul.actions:not(.fixed) li input[type="file"],
   ul.actions:not(.fixed) li input[type="reset"],
   ul.actions:not(.fixed) li input[type="button"],
   ul.actions:not(.fixed) li button,
@@ -927,6 +928,7 @@ ul.icons li a:hover {
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
+input[type="file"]::-webkit-file-upload-button,
 button,
 .button {
   -moz-appearance: none;
@@ -959,6 +961,7 @@ button,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover,
+input[type="file"]::-webkit-file-upload-button:hover,
 button:hover,
 .button:hover {
   border-color: #ff7496;

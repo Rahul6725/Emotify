@@ -1,82 +1,95 @@
 {% load static %}
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Emotify</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-    <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
     <noscript>
-        <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
-</head>
+      <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}"
+    /></noscript>
+  </head>
 
-<body class="is-preload">
+  <body class="is-preload">
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="{% url 'home' %}" class="navbar-brand">Emotify</a>
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="#css">Playlist</a></li>
-            <li><a href="{% url 'account' %}">Hello Rahul</a></li>
-        </ul>
-        <button class="navbar-toggler">
-            <span></span>
-        </button>
+      <a href="{% url 'home' %}" class="navbar-brand">Emotify</a>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="#css">Playlist</a></li>
+        <li><a href="{% url 'account' %}">Hello Rahul</a></li>
+      </ul>
+      <button class="navbar-toggler">
+        <span></span>
+      </button>
     </nav>
 
     <!-- Wrapper -->
     <div id="wrapper">
-
-        <!-- Main -->
-        <section id="main" style="width: auto;">
-            <h2>Account details</h2>
-            <hr />
-            <span class="avatar"><img src="{% static 'images/DSC06030.jpg' %}" alt="" /></span>
-            <div class="fields">
-                <table id="table-values">
-                    <tr>
-                        <td>Name: </td>
-                        <td><p>&nbsp;</p></td>
-                        <td colspan="2">Rahul Ghetia</td>
-                    </tr>
-                    <tr>
-                        <td>Email: </td>
-                        <td><p>&nbsp;</p></td>
-                        <td colspan="2">rahulghetia67@gmail.com</td>
-                    </tr>
-                    <tr>
+      <!-- Main -->
+      {% if user.is_authenticated %} {% for user_profile in profile_pic %}
+      {% if user.id == user_profile.user_id_id %}
+      <section id="main" style="width: auto">
+        <h2>Account details</h2>
+        <hr />
+        <span class="avatar"
+          ><img src="{{ user_profile.user_img }}" alt=""
+        /></span>
+        <div class="fields">
+          <table id="table-values">
+            <tr>
+              <td>Name:</td>
+              <td><p>&nbsp;</p></td>
+              <td colspan="2">
+                {{ user.first_name }}&nbsp;{{ user.last_name }}
+              </td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td><p>&nbsp;</p></td>
+              <td colspan="2">{{ user.email }}</td>
+            </tr>
+            <!-- <tr>
                         <td>Gender: </td>
                         <td><p>&nbsp;</p></td>
                         <td colspan="2">Male</td>
-                    </tr>
-                    <tr>
+                    </tr> -->
+            <!-- <tr>
                         <td>Date of birth: </td>
                         <td><p>&nbsp;</p></td>
                         <td colspan="2">29/04/1999</td>
-                    </tr>
-                </table>
-
-            </div>
-            <hr />
-        </section>
-
-        <!-- Footer -->
-        <footer id="footer">
-            <ul class="copyright">
-                <li>&copy; Emotify</li>
-            </ul>
-        </footer>
+                    </tr> -->
+          </table>
+        </div>
+        <hr />
+      </section>
+      {% endif %}
+      {% endfor %} {% endif %}
+      <!-- Footer -->
+      <footer id="footer">
+        <ul class="copyright">
+          <li>&copy; Emotify</li>
+        </ul>
+      </footer>
     </div>
     <!-- Scripts -->
     <script>
-        if ('addEventListener' in window) {
-            window.addEventListener('load', function () { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
-            document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
-        }
+      if ("addEventListener" in window) {
+        window.addEventListener("load", function () {
+          document.body.className = document.body.className.replace(
+            /\bis-preload\b/,
+            ""
+          );
+        });
+        document.body.className += navigator.userAgent.match(/(MSIE|rv:11\.0)/)
+          ? " is-ie"
+          : "";
+      }
     </script>
-
-</body>
-
+  </body>
 </html>

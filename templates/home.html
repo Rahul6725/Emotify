@@ -27,7 +27,8 @@
     <ul>
       <li><a href="{% url 'home' %}">Home</a></li>
       <li><a href="#css">Playlist</a></li>
-      <li><a href="{% url 'account' %}">Hello Rahul</a></li>
+      <li><a href="{% url 'account' %}">Hello {{ username }}</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
     <button class="navbar-toggler">
       <span></span>

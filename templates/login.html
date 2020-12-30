@@ -21,21 +21,27 @@
         <section id="main">
             <h2>login</h2>
             <hr />
-            <form method="post" action="#">
+            <form method="post" action="login" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="fields">
 
                     <div class="field">
-                        <input type="email" name="email" id="email" placeholder="Email" />
+                        <input type="text" name="username" id="username" placeholder="Username" />
                     </div>
                     <div class="field">
                         <input type="password" name="password" id="password" placeholder="password" />
                     </div>
+                    {% if message != "" %}
+                    <div class="field">
+                        <h5>{{ message }}</h5>
+                    </div>
+                    {% endif %}
                 </div>
                 <a href="{% url 'signup' %}">
                     <h5>Don't have an Account?</h5>
                 </a>
                 <ul class="actions special">
-                    <li><a href="#" class="button">Login</a></li>
+                    <li><input type="submit" value="Login" class="button"></li>
                 </ul>
             </form>
             <hr />

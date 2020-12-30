@@ -5,24 +5,119 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing import image
 import argparse, time, cv2, imutils, datetime, os
 from imutils.video import VideoStream
-from .models import Captured_Images
+from .models import Captured_Images, User_Profile_Images
+from django.contrib import messages
+from django.contrib.auth.models import auth, User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
 
-# Create your views here.
+#  Create your views here.
+username = ""
+context = {}
+
+def handle_image_upload(f, sub_location):
+    i = datetime.datetime.now()
+    now = str(i.year) + "-" + str(i.month) + "-" + str(i.day) + "-" + \
+        str(i.hour) + "-" + str(i.minute) + "-" + \
+        str(i.second)
+    filenaam = "media/" + str(sub_location) + "/" + str(now) + str(f.name)
+    destination = open('media/' + str(sub_location) + '/%s' % f.name, 'wb+')
+    for chunk in f.chunks():
+        destination.write(chunk)
+    destination.close()
+    os.rename('media/' + str(sub_location) + '/%s' % f.name, filenaam)
+    filenaam = '/' + filenaam
+    return(filenaam)
 
 def welcome(request):
+    if request.user.is_active:
+        return redirect("home")
     return render(request, "welcome.html")
 
 def login(request): 
+    global context
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            print("Logged in")
+            return render(request, "home.html", {"username": username})
+        elif username == "" and password == "":
+            context["message"] = "Please enter your username and password"
+            return render(request, "login.html", context)
+        else:
+            context["message"] = "Invalid login credentials"
+            return render(request, "login.html", context)
     return render(request, "login.html")
 
+def logout(request):
+    auth.logout(request)
+    return redirect('welcome')
+
 def signup(request):
+    global username
+    if request.method == "POST":
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        password = request.POST['password']
+        re_password = request.POST['re_password']
+        email = request.POST['email']
+        user_profile_img = request.FILES.get("user_profile_img", None)
+        print(user_profile_img)
+        username = first_name
+        if password == re_password:
+            if User.objects.filter(username=username).exists():
+                context = {'message': 'username already taken'}
+                messages.info(request, 'Username taken')
+                return render(request, 'signup.html', context)
+            elif User.objects.filter(email=email).exists():
+                context = {'message': 'Email ID already taken'}
+                messages.info(request, 'Email ID taken')
+                return render(request, 'signup.html', context)
+            else:
+                if user_profile_img != None:
+                    user_profile = handle_image_upload(user_profile_img, "user_profile_images")
+                    user = User.objects.create_user(
+                        username=username, 
+                        password=password, 
+                        email=email, 
+                        first_name=first_name, 
+                        last_name=last_name 
+                        )
+                    user.save()
+                    user_img = User_Profile_Images(user_id_id=User.objects.get(username=username).id, user_img=user_profile)
+                    user_img.save()
+                    auth.login(request, user)
+                    return render(request, "home.html", {'username': username})
+                else:
+                    user_profile_img = "media/user_profile_images/icons8-user-100.png"
+                    user = User.objects.create_user(
+                        username=username, 
+                        password=password, 
+                        email=email, 
+                        first_name=first_name, 
+                        last_name=last_name
+                        )
+                    user.save()
+                    user_img = User_Profile_Images(user_id_id=User.objects.get(username=username).id, user_img=user_profile_img)
+                    user_img.save()
+                    auth.login(request, user)
+                    return render(request, "home.html", {'username': username})
     return render(request, "signup.html")
 
 def home(request):
-    return render(request, "home.html")
+    if request.user.is_authenticated:
+        user = request.user.username
+        return render(request, "home.html", {'username': user})
 
 def account(request):
-    return render(request, "account.html")
+    if request.user.is_authenticated:
+        if request.user.is_active:
+            id = request.user.id
+            user_profile = User_Profile_Images.objects.filter(user_id_id=id)
+    return render(request, "account.html", {"profile_pic": user_profile})
 
 
 def detectface(request):
@@ -73,7 +168,7 @@ def detectface(request):
         if np.any(p):
             i = datetime.datetime.now()
             now = str(i.year) + '-' + str(i.month) + '-' + str(i.day) + '-' + str(i.day) + '-' + str(i.hour) + '-' + str(i.minute) + '-' + str(i.second)
-            filenaam = 'media/' + "user" + str(now) + '.jpg'
+            filenaam = 'media/user_images/' + "user" + str(now) + '.jpg'
             destination = open(filenaam, 'w+')
             main_pic = cv2.imwrite(filenaam, fram)
             destination.close()

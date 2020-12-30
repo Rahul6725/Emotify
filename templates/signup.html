@@ -22,22 +22,37 @@
 			<h2>Sign up</h2>
 			<hr />
 			<!-- <span class="avatar"><img src="images/DSC06030.jpg" alt="" /></span>  -->
-			<form method="post" action="#">
+			<form method="post" action="signup" enctype="multipart/form-data">
+				{% csrf_token %}
 				<div class="fields">
 
+					<div class="field">
+						<input type="text" name="first_name" id="first_name" placeholder="first name"/>
+					</div>
+					<div class="field">
+						<input type="text" name="last_name" id="last_name" placeholder="last name"/>
+					</div>
 					<div class="field">
 						<input type="email" name="email" id="email" placeholder="Email" />
 					</div>
 					<div class="field">
-						<input type="text" name="email" id="email" placeholder="Username" />
+						<input type="password" name="password" id="password" placeholder="Password" />
 					</div>
 					<div class="field">
-						<input type="password" name="password" id="password" placeholder="password" />
+						<input type="password" name="re_password" id="re_password" placeholder=" re-enter password" />
 					</div>
+					<div class="field">
+						<input type="file" style="width:100%" placeholder="Upload your profile pic" name="user_profile_img" id="user_profile_img" />
+					</div>
+                    {% if message != "" %}
+                    <div class="field">
+                        <h5>{{ message }}</h5>
+                    </div>
+                    {% endif %}
 				</div>
 				<a href="{% url 'login' %}"><h5>Already have an Account?</h5></a>
 				<ul class="actions special">
-					<li><a href="{% url 'home' %}" class="button">Get Started</a></li>
+					<li><input type="submit" value="Get Started" class="button"></li>
 				</ul>
 			</form>
 			<hr />
