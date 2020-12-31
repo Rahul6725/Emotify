@@ -1,196 +1,187 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Emotify</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"
+    ></script>
+    <noscript>
+      <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}"
+    /></noscript>
+  </head>
 
-<head>
-  <title>Emotify</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
-  <noscript>
-    <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
-</head>
-
-<body class="is-preload">
-
-
-  <!-- <div class="ch-username fronte">
+  <body class="is-preload">
+    <!-- <div class="ch-username fronte">
     <div class="content">
       <video id="webcam" autoplay playsinline width="900" height="600"></video>
     </div>
   </div> -->
-  <!-- Navbar -->
-  <nav class="navbar">
-    <a href="{% url 'home' %}" class="navbar-brand">Emotify</a>
-    <ul>
-      <li><a href="{% url 'home' %}">Home</a></li>
-      <li><a href="#css">Playlist</a></li>
-      <li><a href="{% url 'account' %}">Hello {{ username }}</a></li>
-      <li><a href="{% url 'logout' %}">Logout</a></li>
-    </ul>
-    <button class="navbar-toggler">
-      <span></span>
-    </button>
-  </nav>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="{% url 'home' %}" class="navbar-brand">Emotify</a>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="#css">Playlist</a></li>
+        <li><a href="{% url 'account' %}">Hello {{ username }}</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+      <button class="navbar-toggler">
+        <span></span>
+      </button>
+    </nav>
 
-  <section id="header" class="dark">
-    <header>
-      <h1 style="color: white">Welcome to Emotify</h1>
-      <p>Play Songs based on your emotions</p>
-    </header>
-    <ul class="actions special">
-      <li>
-        <a id="detectface" href="{% url 'detectface' %}" style="z-index: 5" class="button">Detect your face</a>
-      </li>
-    </ul>
-  </section>
+    <section id="header" class="dark">
+      <header>
+        <h1 style="color: white">Welcome to Emotify</h1>
+        <p>Play Songs based on your emotions</p>
+      </header>
+      <ul class="actions special">
+        <li>
+          <a
+            id="detectface"
+            href="{% url 'detectface' %}"
+            style="z-index: 5"
+            class="button"
+            >Detect your face</a
+          >
+        </li>
+      </ul>
+    </section>
 
-  <!-- Wrapper -->
+    <!-- Wrapper -->
 
-  <!-- Main -->
-  <div class="background-album">
-    <div class="container">
-      <section>
-        <h2 id="header" style="font-size: 24px; margin-top: 3%">
-          Recent Album
-        </h2>
-        <br />
+    <!-- Main -->
+    <div class="background-album">
+      <div class="container">
+        <section>
+          <h2 id="header" style="font-size: 24px; margin-top: 3%">
+            Recent Album
+          </h2>
+          <br />
 
-        <div class="col-md-4">
-          <div class="album-item">
-            <a href="aesthethica">
-              <img class="album-cover"
-                src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/artistic-album-cover-design-template-d12ef0296af80b58363dc0deef077ecc_screen.jpg?ts=1561488440"
-                alt="Aesthethica" />
-              <div class="overlay base-gradient-bg"></div>
-              <h3 class="heading">Aesthethica</h3>
-              <span class="sub-heading"> Judas Priest </span>
-            </a>
+          <div class="col-md-4">
+            <div class="album-item">
+              <a href="aesthethica">
+                <img
+                  class="album-cover"
+                  src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/artistic-album-cover-design-template-d12ef0296af80b58363dc0deef077ecc_screen.jpg?ts=1561488440"
+                  alt="Aesthethica"
+                />
+                <div class="overlay base-gradient-bg"></div>
+                <h3 class="heading">Aesthethica</h3>
+                <span class="sub-heading"> Judas Priest </span>
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="album-item">
-            <a href="aesthethicaliturgy">
-              <img class="album-cover"
-                src="https://upload.wikimedia.org/wikipedia/en/8/80/Eminem_-_Music_to_Be_Murdered_By.png"
-                alt="Aesthethica Liturgy" />
-              <div class="overlay base-gradient-bg"></div>
-              <h3 class="heading">Aesthethica Liturgy</h3>
-              <span class="sub-heading"> Judas Priest </span>
-            </a>
+          <div class="col-md-4">
+            <div class="album-item">
+              <a href="aesthethicaliturgy">
+                <img
+                  class="album-cover"
+                  src="https://upload.wikimedia.org/wikipedia/en/8/80/Eminem_-_Music_to_Be_Murdered_By.png"
+                  alt="Aesthethica Liturgy"
+                />
+                <div class="overlay base-gradient-bg"></div>
+                <h3 class="heading">Aesthethica Liturgy</h3>
+                <span class="sub-heading"> Judas Priest </span>
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="album-item">
-            <a href="wounded-rhymes">
-              <img class="album-cover"
-                src="https://d2ct9xspam8wud.cloudfront.net/blog/2019/10/14162246/dreamer-1024x1024.jpg"
-                alt="Wounded Rhymes" />
-              <div class="overlay base-gradient-bg"></div>
-              <h3 class="heading">Wounded Rhymes</h3>
-              <span class="sub-heading"> Judas Priest </span>
-            </a>
+          <div class="col-md-4">
+            <div class="album-item">
+              <a href="wounded-rhymes">
+                <img
+                  class="album-cover"
+                  src="https://d2ct9xspam8wud.cloudfront.net/blog/2019/10/14162246/dreamer-1024x1024.jpg"
+                  alt="Wounded Rhymes"
+                />
+                <div class="overlay base-gradient-bg"></div>
+                <h3 class="heading">Wounded Rhymes</h3>
+                <span class="sub-heading"> Judas Priest </span>
+              </a>
+            </div>
           </div>
-        </div>
-        <ul class="actions special">
-          <li>
-            <a href="{% url 'home' %}" style="z-index: 5" class="button">See more</a>
-          </li>
-        </ul>
-      </section>
+          <ul class="actions special">
+            <li>
+              <a href="{% url 'home' %}" style="z-index: 5" class="button"
+                >See more</a
+              >
+            </li>
+          </ul>
+        </section>
 
-      <div class="vc_row-full-width vc_clearfix"></div>
+        <div class="vc_row-full-width vc_clearfix"></div>
+      </div>
+      <!-- .container  -->
     </div>
-    <!-- .container  -->
-  </div>
 
-  <br /><br />
-  <!-- Footer -->
-  <footer id="footer">
-    <ul class="copyright">
-      <li>&copy; Emotify</li>
-    </ul>
-  </footer>
+    <br /><br />
+    <!-- Footer -->
+    <footer id="footer">
+      <ul class="copyright">
+        <li>&copy; Emotify</li>
+      </ul>
+    </footer>
 
-  <!-- Scripts -->
-  <script>
-    if ("addEventListener" in window) {
-      window.addEventListener("load", function () {
-        document.body.className = document.body.className.replace(
-          /\bis-preload\b/,
-          ""
-        );
-      });
-      document.body.className += navigator.userAgent.match(/(MSIE|rv:11\.0)/)
-        ? " is-ie"
-        : "";
-    }
-  </script>
-  <script>
-    const navbarToggler = document.querySelector(".navbar-toggler");
-    const navbarMenu = document.querySelector(".navbar ul");
-    const navbarLinks = document.querySelectorAll(".navbar a");
-
-    navbarToggler.addEventListener("click", navbarTogglerClick);
-
-    function navbarTogglerClick() {
-      navbarToggler.classList.toggle("open-navbar-toggler");
-      navbarMenu.classList.toggle("open");
-    }
-
-    navbarLinks.forEach((elem) =>
-      elem.addEventListener("click", navbarLinkClick)
-    );
-
-    function navbarLinkClick() {
-      if (navbarMenu.classList.contains("open")) {
-        navbarToggler.click();
-      }
-    }
-
-
-  </script>
-  {% comment %} <script>
-    // document.getElementById("facecapture").style.display = "none";
-    $(document).ready(function () {
-      $(".ch-username").hide();
-      $("#detectface").click(function () {
-        $(".ch-username").show();
-      });
-    });
-
-
-
-    document.getElementById("detectface").addEventListener("click", detect);
-    function detect() {
-      const webcamElement = document.getElementById("webcam");
-      const webcam = new Webcam(
-        webcamElement,
-        "user"
-      );
-      webcam
-        .start()
-        .then((result) => {
-          console.log("webcam started");
-        })
-        .catch((err) => {
-          console.log(err);
+    <!-- Scripts -->
+    <script>
+      if ("addEventListener" in window) {
+        window.addEventListener("load", function () {
+          document.body.className = document.body.className.replace(
+            /\bis-preload\b/,
+            ""
+          );
         });
-        $(".ch-username").mouseup(function (e) {
-      var container = $(".content");
-      var bod = $(".ch-username");
-
-      // if the target of the click isn't the container nor a descendant of the container
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
-        bod.hide();
-        webcam.stop();
+        document.body.className += navigator.userAgent.match(/(MSIE|rv:11\.0)/)
+          ? " is-ie"
+          : "";
       }
-    });
-    }
+    </script>
+    <script>
+      const navbarToggler = document.querySelector(".navbar-toggler");
+      const navbarMenu = document.querySelector(".navbar ul");
+      const navbarLinks = document.querySelectorAll(".navbar a");
 
-  </script> {% endcomment %}
-</body>
+      navbarToggler.addEventListener("click", navbarTogglerClick);
 
+      function navbarTogglerClick() {
+        navbarToggler.classList.toggle("open-navbar-toggler");
+        navbarMenu.classList.toggle("open");
+      }
+
+      navbarLinks.forEach((elem) =>
+        elem.addEventListener("click", navbarLinkClick)
+      );
+
+      function navbarLinkClick() {
+        if (navbarMenu.classList.contains("open")) {
+          navbarToggler.click();
+        }
+      }
+    </script>
+    <script>
+      var myNav = document.getElementById("navbar");
+
+      window.onscroll = function () {
+        "use strict";
+        if (
+          document.body.scrollTop >= 28 ||
+          document.documentElement.scrollTop >= 28
+        ) {
+          myNav.classList.add("scroll");
+        } else {
+          myNav.classList.remove("scroll");
+        }
+      };
+    </script>
+  </body>
 </html>

@@ -1179,6 +1179,7 @@ body.is-ie #wrapper {
 /* Navbar */
 
 .navbar {
+  background-color: transparent;
   color: #fff;
   width: 100%;
   height: 65px;
@@ -1189,6 +1190,7 @@ body.is-ie #wrapper {
   top: 0;
   left: 0;
   z-index: 10;
+  transition: all .6s ease;
 }
 .navbar a {
   text-decoration: none;
@@ -1545,4 +1547,33 @@ background-image: linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 22
   left: 20%;
   top: 10%;
   color: black;
+}
+
+.card-layout {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}
+
+@media (min-width: 768px) {
+  .card-layout {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .card-layout {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-layout {
+    width: 1170px;
+  }
+}
+
+.scroll {
+  background-image: linear-gradient(60deg, rgba(255, 165, 150, 0.8) 5%, rgba(0, 228, 255, 0.65));
 }
