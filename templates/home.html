@@ -42,10 +42,15 @@
       <link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}"
     /></noscript>
     <link
-    href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
-    rel="stylesheet"
-  />
-  <link  rel="stylesheet"  href="{% static 'assets/css/beats-main.css' %}"  type="text/css"  media="all"/>
+      href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/beats-main.css' %}"
+      type="text/css"
+      media="all"
+    />
   </head>
 
   <body class="is-preload">
@@ -86,7 +91,6 @@
       </ul>
     </section>
 
-
     <div class="audio-player-area">
       <div class="container1">
         <div class="musica-audio-player">
@@ -113,7 +117,12 @@
                     <div class="jp-duration" role="timer" aria-label="duration">
                       &nbsp;
                     </div>
-                    <button style="color: white;" class="audio-playlist audio-button">...</button>
+                    <button
+                      style="color: white"
+                      class="audio-playlist audio-button"
+                    >
+                      ...
+                    </button>
                   </div>
                 </div>
                 <div class="jp-volume-controls">
@@ -266,84 +275,101 @@
         }
       };
     </script>
-        <script
-        type="text/javascript"
-        src="{% static 'assets/js/jquery.smartmenus.js' %}"
-      ></script>
-      <script
+    <script
+      type="text/javascript"
+      src="{% static 'assets/js/jquery.smartmenus.js' %}"
+    ></script>
+    <script
       type="text/javascript"
       src="{% static 'assets/js/jquery.nicescroll.min.js' %}"
     ></script>
     <script
-    type="text/javascript"
-    src="{% static 'assets/js/jquery.jplayer.min.js' %}"
-  ></script>
-  <script
-  type="text/javascript"
-  src="{% static 'assets/js/jplayer.playlist.min.js' %}"
-></script>
-<script type="text/javascript">
-  jQuery(document).ready(function ($) {
-    "use strict";
-    new jPlayerPlaylist(
-      {
-        jPlayer: "#musica-jquery-jplayer",
-        cssSelectorAncestor: "#musica-audio-player-container",
-      },
-      [
-        {
-          title: "Cro Magnon Man",
-          artist: "<span class='music-time'>4:28</span>",
-          mp3:
-            "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/TSP-01-Cro_magnon_man.mp3",
-        },
-        {
-          title: "Your Face",
-          artist: "<span class='music-time'>2:56</span>",
-          mp3:
-            "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/TSP-05-Your_face.mp3",
-        },
-        {
-          title: "Miaow",
-          artist: "<span class='music-time'>4:05</span>",
-          mp3:
-            "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/Miaow-02-Hidden.mp3",
-        },
-        {
-          title: "Cybersonnet",
-          artist: "<span class='music-time'>2:38</span>",
-          mp3:
-            "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/TSP-07-Cybersonnet.mp3",
-        },
-        {
-          title: "Tempered song",
-          artist: "<span class='music-time'>5:42</span>",
-          mp3:
-            "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/Miaow-01-Tempered-song.mp3",
-        },
-      ],
-      {
-        playlistOptions: {
-          autoPlay: false,
-          loopOnPrevious: true,
-          shuffleOnLoop: true,
-          enableRemoveControls: true,
-          displayTime: "show",
-          freeItemClass: "jp-playlist-item-free",
-        },
-        swfPath: "js/jquery.jplayer.swf",
-        supplied: "oga, mp3",
-        wmode: "window",
-        useStateClassSkin: true,
-        autoBlur: true,
-        smoothPlayBar: true,
-        keyEnabled: true,
-        remainingDuration: true,
-        volume: 1,
-      }
-    );
-  });
-</script>
-<script type="text/javascript" src="{% static 'assets/js/beats-main.js' %}"></script>
+      type="text/javascript"
+      src="{% static 'assets/js/jquery.jplayer.min.js' %}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{% static 'assets/js/jplayer.playlist.min.js' %}"
+    ></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function ($) {
+        "use strict";
+        var emote = String("{{ emotion }}");
+        if (emote === "Happy") {
+        new jPlayerPlaylist(
+          {
+            jPlayer: "#musica-jquery-jplayer",
+            cssSelectorAncestor: "#musica-audio-player-container",
+          },
+          [
+            {
+              title: "Cro Magnon Man",
+              artist: "<span class='music-time'>4:28</span>",
+              mp3:
+                "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/TSP-01-Cro_magnon_man.mp3",
+            },
+          ],
+          {
+            playlistOptions: {
+              autoPlay: false,
+              loopOnPrevious: true,
+              shuffleOnLoop: true,
+              enableRemoveControls: true,
+              displayTime: "show",
+              freeItemClass: "jp-playlist-item-free",
+            },
+            swfPath: "js/jquery.jplayer.swf",
+            supplied: "oga, mp3",
+            wmode: "window",
+            useStateClassSkin: true,
+            autoBlur: true,
+            smoothPlayBar: true,
+            keyEnabled: true,
+            remainingDuration: true,
+            volume: 1,
+          }
+        );
+        }
+        if (emote === "Neutral") {
+        new jPlayerPlaylist(
+          {
+            jPlayer: "#musica-jquery-jplayer",
+            cssSelectorAncestor: "#musica-audio-player-container",
+          },
+          [
+            {
+              title: "Your Face",
+              artist: "<span class='music-time'>2:56</span>",
+              mp3:
+                "http://preview.enroutedigitallab.com/beats/wp/wp-content/uploads/2017/07/TSP-05-Your_face.mp3",
+            },
+           ],
+          {
+            playlistOptions: {
+              autoPlay: false,
+              loopOnPrevious: true,
+              shuffleOnLoop: true,
+              enableRemoveControls: true,
+              displayTime: "show",
+              freeItemClass: "jp-playlist-item-free",
+            },
+            swfPath: "js/jquery.jplayer.swf",
+            supplied: "oga, mp3",
+            wmode: "window",
+            useStateClassSkin: true,
+            autoBlur: true,
+            smoothPlayBar: true,
+            keyEnabled: true,
+            remainingDuration: true,
+            volume: 1,
+          }
+        );
+        }
+      });
+    </script>
+    <script
+      type="text/javascript"
+      src="{% static 'assets/js/beats-main.js' %}"
+    ></script>
   </body>
 </html>

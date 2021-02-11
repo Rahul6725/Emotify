@@ -163,6 +163,7 @@ def detectface(request):
             p = cv2.rectangle(fram, (startX, StartY), (endX, endY), (0, 0, 255), 2)
             preds=classifier.predict(roi)[0]
             label=class_labels[preds.argmax()]
+            # print(label)
             label_position=(startX,y)
             cv2.putText(fram,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,2,(0,255,0),3)
         if np.any(p):
@@ -177,4 +178,4 @@ def detectface(request):
     vs.stop()
     cap = Captured_Images(user_face_image = filenaam)
     cap.save()
-    return redirect('home')
+    return render(request, "home.html", {'emotion':label})
