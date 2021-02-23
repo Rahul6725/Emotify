@@ -5,8 +5,9 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.preprocessing import image
 import argparse, time, cv2, imutils, datetime, os
 from imutils.video import VideoStream
-from .models import Captured_Images, User_Profile_Images
+from .models import Captured_Images, User_Profile_Images, Songs_Metadata, Songs
 from django.contrib import messages
+from mutagen.id3 import ID3
 from django.contrib.auth.models import auth, User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
@@ -33,6 +34,33 @@ def welcome(request):
     if request.user.is_active:
         return redirect("home")
     return render(request, "welcome.html")
+
+def readSongsMetaData():
+    j = ""    
+
+
+    song = Songs.objects.all()
+    for i in song:
+        p = Songs_Metadata.objects.all().filter(song_id_id = i.id)
+        if not p:
+            j = str(i.song_file)
+            j = "media/" + j
+            tags = ID3(j)
+            pict = tags.get("APIC:").data
+            j = j.strip("media/song_files/")
+            coverart = "media/album_images/" + j
+            coverart = coverart.rstrip(".mp3")
+            coverart = coverart + ".jpeg"
+            destination = open(coverart, "wb+")
+            destination.write(pict)
+            destination.close()
+            metadata = Songs_Metadata(
+                song_id = Songs.objects.get(id=i.id), 
+                album_name = tags.get("TALB"),
+                album_img = coverart,
+                artist_name = tags.get("TPE1")
+            )
+            metadata.save()
 
 def login(request): 
     global context
@@ -110,6 +138,7 @@ def signup(request):
 def home(request):
     if request.user.is_authenticated:
         user = request.user.username
+        readSongsMetaData()
         return render(request, "home.html", {'username': user})
 
 def account(request):
@@ -118,6 +147,7 @@ def account(request):
             id = request.user.id
             user_profile = User_Profile_Images.objects.filter(user_id_id=id)
     return render(request, "account.html", {"profile_pic": user_profile})
+
 
 
 def detectface(request):
